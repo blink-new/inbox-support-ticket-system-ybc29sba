@@ -6,19 +6,20 @@ import {
   Inbox, 
   LogOut, 
   Menu, 
-  Moon, 
-  Sun, 
   User
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 import { Sidebar } from './Sidebar'
+import { ThemeToggle } from './ThemeToggle'
+import { UserMenu } from './UserMenu'
+import { useToast } from '../hooks/use-toast'
 
 export default function Layout() {
   const { user, logout, isAdmin } = useAuth()
   const navigate = useNavigate()
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const { toast } = useToast()
 
   useEffect(() => {
     if (!user) {
@@ -35,10 +36,12 @@ export default function Layout() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    document.documentElement.classList.toggle('dark')
+  const handleLogout = () => {
+    logout()
+    toast({
+      title: 'Logged out',
+      description: 'You have been successfully logged out.',
+    })
   }
 
   if (!user) return null
@@ -75,13 +78,9 @@ export default function Layout() {
             <h1 className="text-xl font-semibold">Support Inbox</h1>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-            </Button>
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={() => logout()}>
+            <ThemeToggle />
+            <UserMenu />
+            <Button variant="ghost" size="icon" onClick={handleLogout} aria-label="Log out">
               <LogOut className="h-5 w-5" />
             </Button>
           </div>

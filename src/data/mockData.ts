@@ -20,6 +20,11 @@ export type Message = {
   content: string
   timestamp: string
   isAdmin: boolean
+  attachments?: {
+    name: string
+    size: number
+    type: string
+  }[]
 }
 
 export const mockTickets: Ticket[] = [
@@ -99,7 +104,33 @@ export const mockTickets: Ticket[] = [
     updatedAt: '2023-06-11T17:15:00Z',
     initialMessage: 'Just wanted to say thank you for the excellent customer service. Your team has been very helpful with my questions.',
     lastMessage: 'You\'re welcome! We\'re glad we could help.',
-    labels: ['Feedback', 'General']
+    labels: ['General', 'Feedback']
+  },
+  {
+    id: '7',
+    subject: 'Problem with payment method',
+    status: 'open',
+    priority: 'normal',
+    customerName: 'David Lee',
+    customerEmail: 'david.lee@example.com',
+    createdAt: '2023-06-16T13:20:00Z',
+    updatedAt: '2023-06-16T15:45:00Z',
+    initialMessage: 'I\'m trying to update my payment method but the system keeps rejecting my new credit card. I\'ve verified all the information is correct.',
+    lastMessage: 'I\'ve tried with a different card as well, same issue.',
+    labels: ['Billing', 'Account']
+  },
+  {
+    id: '8',
+    subject: 'Missing features in latest update',
+    status: 'open',
+    priority: 'normal',
+    customerName: 'Sarah Johnson',
+    customerEmail: 'sarah.johnson@example.com',
+    createdAt: '2023-06-17T09:30:00Z',
+    updatedAt: '2023-06-17T11:15:00Z',
+    initialMessage: 'After the latest update, I can\'t find the export to PDF feature that I used frequently. Has it been removed or relocated?',
+    lastMessage: 'This feature was essential for my workflow, please advise.',
+    labels: ['Technical', 'Feature Request']
   }
 ];
 
@@ -126,7 +157,14 @@ export const mockMessages: Message[] = [
     ticketId: '2',
     content: 'I\'ve attached my bank statement showing both charges.',
     timestamp: '2023-06-14T16:20:00Z',
-    isAdmin: false
+    isAdmin: false,
+    attachments: [
+      {
+        name: 'bank_statement_june.pdf',
+        size: 1240000,
+        type: 'application/pdf'
+      }
+    ]
   },
   {
     ticketId: '3',
@@ -144,12 +182,122 @@ export const mockMessages: Message[] = [
     ticketId: '3',
     content: 'We\'ve just released the update with dark mode. You can enable it in your settings. Let us know what you think!',
     timestamp: '2023-06-12T11:45:00Z',
-    isAdmin: true
+    isAdmin: true,
+    attachments: [
+      {
+        name: 'dark_mode_instructions.pdf',
+        size: 850000,
+        type: 'application/pdf'
+      },
+      {
+        name: 'release_notes_v2.1.txt',
+        size: 12500,
+        type: 'text/plain'
+      }
+    ]
   },
   {
     ticketId: '3',
     content: 'Thanks for implementing this! The dark mode looks great.',
     timestamp: '2023-06-12T13:30:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '4',
+    content: 'I\'m getting the following error when trying to authenticate: "Invalid API credentials". I\'ve double-checked my API key and it seems correct.',
+    timestamp: '2023-06-13T14:20:00Z',
+    isAdmin: false,
+    attachments: [
+      {
+        name: 'error_screenshot.png',
+        size: 1450000,
+        type: 'image/png'
+      }
+    ]
+  },
+  {
+    ticketId: '4',
+    content: 'Thanks for providing the screenshot. It looks like you might be using our legacy API. We\'ve updated our authentication method recently. Please try using the new API endpoint as described in our documentation: https://api.example.com/v2/auth',
+    timestamp: '2023-06-13T16:45:00Z',
+    isAdmin: true
+  },
+  {
+    ticketId: '4',
+    content: 'I\'ve tried the solution you suggested but still getting the same error.',
+    timestamp: '2023-06-14T09:10:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '5',
+    content: 'I need to export all my data for a presentation tomorrow, but the export button isn\'t working. This is urgent as I need this for a client meeting.',
+    timestamp: '2023-06-15T08:45:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '5',
+    content: 'I understand the urgency. We\'re experiencing some issues with our export functionality. As a workaround, I\'ve manually generated an export of your data and attached it to this message. Please let me know if this works for you.',
+    timestamp: '2023-06-15T10:15:00Z',
+    isAdmin: true,
+    attachments: [
+      {
+        name: 'data_export_emily_chen.xlsx',
+        size: 2540000,
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }
+    ]
+  },
+  {
+    ticketId: '5',
+    content: 'Please help ASAP, my meeting is tomorrow morning.',
+    timestamp: '2023-06-15T11:30:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '6',
+    content: 'Just wanted to say thank you for the excellent customer service. Your team has been very helpful with my questions.',
+    timestamp: '2023-06-11T16:30:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '6',
+    content: 'You\'re welcome! We\'re glad we could help. Don\'t hesitate to reach out if you have any other questions in the future.',
+    timestamp: '2023-06-11T17:15:00Z',
+    isAdmin: true
+  },
+  {
+    ticketId: '7',
+    content: 'I\'m trying to update my payment method but the system keeps rejecting my new credit card. I\'ve verified all the information is correct.',
+    timestamp: '2023-06-16T13:20:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '7',
+    content: 'I\'m sorry you\'re having trouble updating your payment method. Could you please confirm the card is not expired and that you\'re entering the correct billing address associated with the card?',
+    timestamp: '2023-06-16T14:30:00Z',
+    isAdmin: true
+  },
+  {
+    ticketId: '7',
+    content: 'I\'ve tried with a different card as well, same issue.',
+    timestamp: '2023-06-16T15:45:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '8',
+    content: 'After the latest update, I can\'t find the export to PDF feature that I used frequently. Has it been removed or relocated?',
+    timestamp: '2023-06-17T09:30:00Z',
+    isAdmin: false
+  },
+  {
+    ticketId: '8',
+    content: 'The PDF export feature has been temporarily disabled due to some compatibility issues with the new version. We\'re working on fixing it and it should be available again in our next patch update scheduled for next week.',
+    timestamp: '2023-06-17T10:45:00Z',
+    isAdmin: true
+  },
+  {
+    ticketId: '8',
+    content: 'This feature was essential for my workflow, please advise.',
+    timestamp: '2023-06-17T11:15:00Z',
     isAdmin: false
   }
 ];

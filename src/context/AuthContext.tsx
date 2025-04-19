@@ -1,11 +1,12 @@
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 
 type User = {
   id: string
   name: string
   email: string
   role: 'admin' | 'customer'
+  avatarUrl?: string
 }
 
 type AuthContextType = {
@@ -18,8 +19,20 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  // For prototype, we'll use a mock user
-  const [user, setUser] = useState<User | null>(null)
+  // Try to get user from localStorage on initial load
+  const [user, setUser] = useState<User | null>(() => {
+    const savedUser = localStorage.getItem('user')
+    return savedUser ? JSON.parse(savedUser) : null
+  })
+
+  // Update localStorage when user changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user))
+    } else {
+      localStorage.removeItem('user')
+    }
+  }, [user])
 
   const login = async (email: string, password: string) => {
     // Mock login for prototype
@@ -28,20 +41,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: '1',
         name: 'Admin User',
         email: email,
-        role: 'admin'
+        role: 'admin',
+        avatarUrl: 'https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff'
       })
     } else {
       setUser({
         id: '2',
-        name: 'Customer User',
+        name: 'John Doe',
         email: email,
-        role: 'customer'
+        role: 'customer',
+        avatarUrl: 'https://ui-avatars.com/api/?name=John+Doe&background=27AE60&color=fff'
       })
     }
   }
 
   const logout = () => {
     setUser(null)
+    localStorage.removeItem('user')
   }
 
   return (
