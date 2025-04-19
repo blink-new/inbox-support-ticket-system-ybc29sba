@@ -6,8 +6,46 @@ import CustomerView from './pages/CustomerView'
 import AdminView from './pages/AdminView'
 import TicketDetail from './pages/TicketDetail'
 import Login from './pages/Login'
-import { AuthProvider } from './context/AuthContext'
+import LandingPage from './pages/LandingPage'
+import { AuthProvider, useAuth } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeProvider'
+
+// Protected route component
+const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+  const { user } = useAuth()
+  
+  if (!user) {
+    return <Navigate to="/landing" replace />
+  }
+  
+  return children
+}
+
+function AppRoutes() {
+  const { user } = useAuth()
+  
+  return (
+    <Routes>
+      <Route path="/landing" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
+      
+      <Route path="/" element={
+        user ? <Navigate to={user.role === 'admin' ? '/admin' : '/customer'} replace /> : <Navigate to="/landing" replace />
+      } />
+      
+      <Route path="/" element={
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      }>
+        <Route path="customer" element={<CustomerView />} />
+        <Route path="customer/:ticketId" element={<TicketDetail />} />
+        <Route path="admin" element={<AdminView />} />
+        <Route path="admin/:ticketId" element={<TicketDetail />} />
+      </Route>
+    </Routes>
+  )
+}
 
 function App() {
   return (
@@ -15,16 +53,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Toaster />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Navigate to="/customer" replace />} />
-              <Route path="customer" element={<CustomerView />} />
-              <Route path="customer/:ticketId" element={<TicketDetail />} />
-              <Route path="admin" element={<AdminView />} />
-              <Route path="admin/:ticketId" element={<TicketDetail />} />
-            </Route>
-          </Routes>
+          <AppRoutes />
         </Router>
       </AuthProvider>
     </ThemeProvider>

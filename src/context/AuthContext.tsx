@@ -12,6 +12,7 @@ type User = {
 type AuthContextType = {
   user: User | null
   login: (email: string, password: string) => Promise<void>
+  signup: (name: string, email: string, password: string) => Promise<void>
   logout: () => void
   isAdmin: boolean
 }
@@ -55,6 +56,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const signup = async (name: string, email: string, password: string) => {
+    // Mock signup for prototype
+    // In a real app, this would create a new user in the database
+    
+    // For demo purposes, we'll just simulate a successful signup
+    // and then log the user in
+    const isAdmin = email.includes('admin')
+    
+    setUser({
+      id: Math.random().toString(36).substring(2, 9), // Generate random ID
+      name: name,
+      email: email,
+      role: isAdmin ? 'admin' : 'customer',
+      avatarUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${isAdmin ? '0D8ABC' : '27AE60'}&color=fff`
+    })
+  }
+
   const logout = () => {
     setUser(null)
     localStorage.removeItem('user')
@@ -63,7 +81,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={{ 
       user, 
-      login, 
+      login,
+      signup,
       logout,
       isAdmin: user?.role === 'admin'
     }}>
