@@ -6,39 +6,46 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card'
-import { Inbox, AlertCircle, ArrowLeft } from 'lucide-react'
+import { Inbox, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react'
 import { Alert, AlertDescription } from '../components/ui/alert'
 
-export default function Login() {
+export default function SignupPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const { login } = useAuth()
+  const [success, setSuccess] = useState<string | null>(null)
+  const { signup } = useAuth()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
+    setSuccess(null)
     setIsLoading(true)
     
     try {
-      await login(email, password)
-      if (email.includes('admin')) {
-        navigate('/admin')
-      } else {
-        navigate('/customer')
-      }
+      await signup(name, email, password)
+      setSuccess('Account created successfully!')
+      
+      // Redirect to the appropriate dashboard after a short delay
+      setTimeout(() => {
+        if (email.includes('admin')) {
+          navigate('/admin')
+        } else {
+          navigate('/customer')
+        }
+      }, 1500)
     } catch (error) {
-      console.error('Login failed:', error)
-      setError('Invalid email or password. Please try again.')
-    } finally {
+      console.error('Signup failed:', error)
+      setError('Failed to create account. Please try again.')
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-background to-background/80 p-4">
+    <div className="min-h-screen bg-gradient-to-b from-background to-background/80 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <Button 
           variant="ghost" 
@@ -48,20 +55,21 @@ export default function Login() {
           <ArrowLeft className="h-4 w-4" /> Back to home
         </Button>
         
-        <Card className="w-full border-2">
-          <CardHeader className="space-y-1 text-center">
+        <Card className="border-2">
+          <CardHeader className="space-y-1">
             <div className="flex justify-center mb-2">
               <div className="bg-primary/10 p-3 rounded-full">
                 <Inbox className="h-6 w-6 text-primary" />
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold">Sign In</CardTitle>
-            <CardDescription>
-              Enter your email to sign in to your account
+            <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
+            <CardDescription className="text-center">
+              Enter your information to get started
             </CardDescription>
           </CardHeader>
-          <form onSubmit={handleSubmit}>
-            <CardContent className="space-y-4">
+          
+          <form onSubmit={handleSignup}>
+            <CardContent className="space-y-4 pt-4">
               {error && (
                 <Alert variant="destructive">
                   <AlertCircle className="h-4 w-4" />
@@ -69,6 +77,24 @@ export default function Login() {
                 </Alert>
               )}
               
+              {success && (
+                <Alert variant="default" className="bg-green-50 text-green-800 border-green-200">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  <AlertDescription>{success}</AlertDescription>
+                </Alert>
+              )}
+              
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -78,40 +104,35 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  autoComplete="email"
                 />
               </div>
               <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <Button variant="link" className="p-0 h-auto text-xs" type="button">
-                    Forgot password?
-                  </Button>
-                </div>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  autoComplete="current-password"
                 />
               </div>
+              
               <div className="bg-muted/50 p-3 rounded-md text-sm text-muted-foreground">
                 <p className="font-medium mb-1">Demo accounts:</p>
-                <p>- Admin: admin@example.com (any password)</p>
-                <p>- Customer: customer@example.com (any password)</p>
+                <p>- Include "admin" in your email to create an admin account</p>
+                <p>- Any other email will create a customer account</p>
               </div>
             </CardContent>
+            
             <CardFooter className="flex flex-col space-y-4">
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? 'Signing in...' : 'Sign in'}
+                {isLoading ? 'Creating account...' : 'Create account'}
               </Button>
               
               <div className="text-center text-sm text-muted-foreground">
-                Don't have an account?{' '}
-                <Link to="/signup" className="text-primary hover:underline">
-                  Sign up
+                Already have an account?{' '}
+                <Link to="/login" className="text-primary hover:underline">
+                  Sign in
                 </Link>
               </div>
             </CardFooter>

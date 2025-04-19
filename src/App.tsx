@@ -7,6 +7,7 @@ import AdminView from './pages/AdminView'
 import TicketDetail from './pages/TicketDetail'
 import Login from './pages/Login'
 import LandingPage from './pages/LandingPage'
+import SignupPage from './pages/SignupPage'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeProvider'
 
@@ -28,6 +29,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignupPage />} />
       
       <Route path="/" element={
         user ? <Navigate to={user.role === 'admin' ? '/admin' : '/customer'} replace /> : <Navigate to="/landing" replace />
