@@ -46,7 +46,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-hero subtle-grid flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <Button 
           variant="ghost" 
@@ -61,7 +61,7 @@ export default function SignupPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="border-2 shadow-lg">
+          <Card className="glass-card shadow-soft">
             <CardHeader className="space-y-1">
               <div className="flex justify-center mb-2">
                 <div className="bg-primary p-3 rounded-full">
@@ -99,7 +99,7 @@ export default function SignupPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="border-primary/20 focus:border-primary"
+                    className="premium-input"
                   />
                 </div>
                 <div className="space-y-2">
@@ -111,7 +111,7 @@ export default function SignupPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="border-primary/20 focus:border-primary"
+                    className="premium-input"
                   />
                 </div>
                 <div className="space-y-2">
@@ -122,11 +122,11 @@ export default function SignupPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="border-primary/20 focus:border-primary"
+                    className="premium-input"
                   />
                 </div>
                 
-                <div className="bg-muted/50 p-3 rounded-md text-sm text-muted-foreground">
+                <div className="bg-muted/50 p-4 rounded-lg text-sm text-muted-foreground">
                   <p className="font-medium mb-1">Demo accounts:</p>
                   <p>- Include "admin" in your email to create an admin account</p>
                   <p>- Any other email will create a customer account</p>
@@ -136,7 +136,7 @@ export default function SignupPage() {
               <CardFooter className="flex flex-col space-y-4">
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors" 
+                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg py-6" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Creating account...' : 'Create account'}

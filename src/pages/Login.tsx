@@ -39,7 +39,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-hero p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-hero subtle-grid p-4">
       <div className="w-full max-w-md">
         <Button 
           variant="ghost" 
@@ -54,7 +54,7 @@ export default function Login() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="w-full border-2 shadow-lg">
+          <Card className="w-full glass-card shadow-soft">
             <CardHeader className="space-y-1 text-center">
               <div className="flex justify-center mb-2">
                 <div className="bg-primary p-3 rounded-full">
@@ -85,7 +85,7 @@ export default function Login() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     autoComplete="email"
-                    className="border-primary/20 focus:border-primary"
+                    className="premium-input"
                   />
                 </div>
                 <div className="space-y-2">
@@ -102,10 +102,10 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     autoComplete="current-password"
-                    className="border-primary/20 focus:border-primary"
+                    className="premium-input"
                   />
                 </div>
-                <div className="bg-muted/50 p-3 rounded-md text-sm text-muted-foreground">
+                <div className="bg-muted/50 p-4 rounded-lg text-sm text-muted-foreground">
                   <p className="font-medium mb-1">Demo accounts:</p>
                   <p>- Admin: admin@example.com (any password)</p>
                   <p>- Customer: customer@example.com (any password)</p>
@@ -114,7 +114,7 @@ export default function Login() {
               <CardFooter className="flex flex-col space-y-4">
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors" 
+                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg py-6" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Signing in...' : 'Sign in'}

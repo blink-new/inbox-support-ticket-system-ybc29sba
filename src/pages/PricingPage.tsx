@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card'
-import { Inbox, CheckCircle, ArrowLeft, ArrowRight, X, Check } from 'lucide-react'
+import { Inbox, CheckCircle, ArrowLeft, ArrowRight, X, Check, Shield, Zap, Users } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Switch } from '../components/ui/switch'
 import { Label } from '../components/ui/label'
@@ -34,6 +34,7 @@ export default function PricingPage() {
       color: 'bg-blue-500 hover:bg-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/10',
       iconColor: 'text-blue-500',
+      icon: <Users className="h-6 w-6" />,
     },
     {
       name: 'Professional',
@@ -54,6 +55,7 @@ export default function PricingPage() {
       color: 'bg-primary hover:bg-primary/90',
       bgColor: 'bg-primary/5 dark:bg-primary/10',
       iconColor: 'text-primary',
+      icon: <Zap className="h-6 w-6" />,
     },
     {
       name: 'Enterprise',
@@ -76,6 +78,7 @@ export default function PricingPage() {
       color: 'bg-purple-600 hover:bg-purple-700',
       bgColor: 'bg-purple-50 dark:bg-purple-900/10',
       iconColor: 'text-purple-600',
+      icon: <Shield className="h-6 w-6" />,
     }
   ]
 
@@ -100,22 +103,22 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero subtle-grid">
       {/* Header/Navigation */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-white/90 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <div className="bg-primary p-2 rounded-lg">
                 <Inbox className="h-6 w-6 text-white" />
               </div>
-              <span className="font-bold text-xl">Support Inbox</span>
+              <span className="font-bold text-xl tracking-tight">Inbox</span>
             </div>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" onClick={() => navigate('/login')}>Sign In</Button>
+            <div className="flex items-center gap-6">
+              <Button variant="ghost" onClick={() => navigate('/login')} className="font-medium">Sign In</Button>
               <Button 
                 onClick={() => navigate('/signup')}
-                className="bg-primary hover:bg-primary/90 text-white transition-colors"
+                className="bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg px-5 py-2 font-medium"
               >
                 Get Started
               </Button>
@@ -136,22 +139,22 @@ export default function PricingPage() {
       </div>
 
       {/* Pricing Header */}
-      <div className="container mx-auto px-4 py-12 text-center">
+      <div className="container mx-auto px-4 py-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
             Simple, transparent <span className="gradient-text">pricing</span>
           </h1>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Choose the plan that's right for your business. All plans include a 14-day free trial.
           </p>
 
           {/* Billing toggle */}
-          <div className="flex items-center justify-center gap-4 mb-12">
+          <div className="flex items-center justify-center gap-4 mb-16">
             <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-foreground' : 'text-muted-foreground'}`}>
               Monthly
             </span>
@@ -192,22 +195,27 @@ export default function PricingPage() {
                 </div>
               )}
               
-              <Card className={`border-2 ${plan.popular ? 'border-primary shadow-lg' : ''} h-full flex flex-col`}>
-                <CardHeader className={`${plan.bgColor} rounded-t-lg`}>
-                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                  <CardDescription>{plan.description}</CardDescription>
+              <Card className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''} h-full flex flex-col`}>
+                <CardHeader className={`${plan.bgColor} rounded-t-xl`}>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className={`w-10 h-10 rounded-full ${plan.iconColor} bg-white/90 flex items-center justify-center`}>
+                      {plan.icon}
+                    </div>
+                    <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                  </div>
+                  <CardDescription className="text-base">{plan.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="pt-6 flex-grow">
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold">${plan.price}</span>
-                    <span className="text-muted-foreground">/{billingCycle === 'monthly' ? 'month' : 'year'}</span>
+                  <div className="mb-6 flex items-end">
+                    <span className="text-5xl font-bold">${plan.price}</span>
+                    <span className="text-muted-foreground ml-2">/{billingCycle === 'monthly' ? 'month' : 'year'}</span>
                   </div>
                   
                   <div className="space-y-4">
                     <p className="font-medium">What's included:</p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
+                        <li key={i} className="flex items-start gap-3">
                           <Check className={`h-5 w-5 ${plan.iconColor} shrink-0 mt-0.5`} />
                           <span>{feature}</span>
                         </li>
@@ -217,9 +225,9 @@ export default function PricingPage() {
                     {plan.limitations.length > 0 && (
                       <>
                         <p className="font-medium text-muted-foreground pt-2">Limitations:</p>
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                           {plan.limitations.map((limitation, i) => (
-                            <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                            <li key={i} className="flex items-start gap-3 text-muted-foreground">
                               <X className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
                               <span>{limitation}</span>
                             </li>
@@ -231,7 +239,7 @@ export default function PricingPage() {
                 </CardContent>
                 <CardFooter>
                   <Button 
-                    className={`w-full text-white transition-colors ${plan.color}`}
+                    className={`w-full text-white transition-colors ${plan.color} rounded-lg py-6`}
                     onClick={() => navigate('/signup')}
                   >
                     {plan.cta}
@@ -244,28 +252,70 @@ export default function PricingPage() {
         </motion.div>
       </div>
 
+      {/* Enterprise Section */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto glass-card p-10 rounded-2xl">
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="md:w-1/2">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Need a custom solution?</h2>
+              <p className="text-muted-foreground mb-6">
+                Our enterprise plan offers customizable solutions for large organizations with complex support needs. 
+                Get in touch with our sales team to discuss your specific requirements.
+              </p>
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg"
+                onClick={() => navigate('/signup')}
+              >
+                Contact Sales
+              </Button>
+            </div>
+            <div className="md:w-1/2 bg-primary/5 p-6 rounded-xl">
+              <h3 className="font-semibold mb-4">Enterprise features include:</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span>Custom integrations with your existing tools</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span>Dedicated account manager and priority support</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span>Advanced security features and compliance</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <span>Custom SLA with guaranteed response times</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* FAQ Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
           
           <div className="space-y-6">
-            <div className="bg-card border rounded-lg p-6">
+            <div className="bg-card rounded-xl p-6 shadow-soft">
               <h3 className="text-lg font-semibold mb-2">Can I change plans later?</h3>
               <p className="text-muted-foreground">Yes, you can upgrade or downgrade your plan at any time. Changes to your billing will be prorated.</p>
             </div>
             
-            <div className="bg-card border rounded-lg p-6">
+            <div className="bg-card rounded-xl p-6 shadow-soft">
               <h3 className="text-lg font-semibold mb-2">What happens after my trial ends?</h3>
               <p className="text-muted-foreground">After your 14-day trial, you'll be automatically switched to your selected plan. We'll send you a reminder before charging your card.</p>
             </div>
             
-            <div className="bg-card border rounded-lg p-6">
+            <div className="bg-card rounded-xl p-6 shadow-soft">
               <h3 className="text-lg font-semibold mb-2">Do you offer discounts for nonprofits?</h3>
               <p className="text-muted-foreground">Yes, we offer special pricing for nonprofit organizations. Please contact our sales team for more information.</p>
             </div>
             
-            <div className="bg-card border rounded-lg p-6">
+            <div className="bg-card rounded-xl p-6 shadow-soft">
               <h3 className="text-lg font-semibold mb-2">How do I cancel my subscription?</h3>
               <p className="text-muted-foreground">You can cancel your subscription at any time from your account settings. You'll continue to have access until the end of your billing period.</p>
             </div>
@@ -276,20 +326,20 @@ export default function PricingPage() {
       {/* CTA Section */}
       <div className="container mx-auto px-4 py-16">
         <motion.div 
-          className="max-w-3xl mx-auto text-center space-y-6 bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-xl border"
+          className="max-w-3xl mx-auto text-center space-y-6 glass-card p-12 rounded-2xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <h2 className="text-3xl font-bold">Ready to get started?</h2>
-          <p className="text-muted-foreground">
-            Join thousands of businesses that use Support Inbox to provide exceptional customer service.
+          <p className="text-muted-foreground text-lg">
+            Join thousands of businesses that use Inbox to provide exceptional customer service.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button 
               size="lg" 
               onClick={() => navigate('/signup')} 
-              className="gap-2 bg-primary hover:bg-primary/90 text-white transition-colors"
+              className="gap-2 bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg px-8 py-6 text-base font-medium"
             >
               Start Your Free Trial <ArrowRight className="h-4 w-4" />
             </Button>
@@ -297,7 +347,7 @@ export default function PricingPage() {
               size="lg" 
               variant="outline" 
               onClick={() => navigate('/login')}
-              className="border-primary text-primary hover:bg-primary/10 transition-colors"
+              className="border-primary text-primary hover:bg-primary/10 transition-colors rounded-lg px-8 py-6 text-base font-medium"
             >
               Contact Sales
             </Button>
@@ -306,17 +356,56 @@ export default function PricingPage() {
       </div>
       
       {/* Footer */}
-      <footer className="border-t py-8 bg-muted/30">
+      <footer className="border-t py-12 bg-muted/20">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Features</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Security</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Enterprise</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Resources</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Documentation</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Guides</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">API Reference</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Blog</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">About</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Careers</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Partners</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">SLA</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
               <div className="bg-primary p-2 rounded-lg">
                 <Inbox className="h-5 w-5 text-white" />
               </div>
-              <span className="font-semibold">Support Inbox</span>
+              <span className="font-semibold">Inbox</span>
             </div>
             <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Support Inbox. All rights reserved.
+              © {new Date().getFullYear()} Inbox, Inc. All rights reserved.
             </div>
           </div>
         </div>
