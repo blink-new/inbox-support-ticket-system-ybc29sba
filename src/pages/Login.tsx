@@ -43,7 +43,7 @@ export default function Login() {
       <div className="w-full max-w-md">
         <Button 
           variant="ghost" 
-          className="mb-4 pl-0 flex items-center gap-1 text-primary" 
+          className="back-button mb-4" 
           onClick={() => navigate('/landing')}
         >
           <ArrowLeft className="h-4 w-4" /> Back to home
@@ -54,7 +54,7 @@ export default function Login() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="w-full glass-card shadow-soft">
+          <Card className="auth-card">
             <CardHeader className="space-y-1 text-center">
               <div className="flex justify-center mb-2">
                 <div className="bg-primary p-3 rounded-full">
@@ -66,7 +66,7 @@ export default function Login() {
                 Enter your email to sign in to your account
               </CardDescription>
             </CardHeader>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="auth-form">
               <CardContent className="space-y-4">
                 {error && (
                   <Alert variant="destructive">
@@ -75,7 +75,7 @@ export default function Login() {
                   </Alert>
                 )}
                 
-                <div className="space-y-2">
+                <div className="auth-form-group">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
@@ -85,13 +85,13 @@ export default function Login() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     autoComplete="email"
-                    className="premium-input"
+                    className="auth-input"
                   />
                 </div>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
+                <div className="auth-form-group">
+                  <div className="auth-form-label">
                     <Label htmlFor="password">Password</Label>
-                    <Button variant="link" className="p-0 h-auto text-xs text-primary" type="button">
+                    <Button variant="link" className="auth-form-forgot" type="button">
                       Forgot password?
                     </Button>
                   </div>
@@ -102,27 +102,27 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     autoComplete="current-password"
-                    className="premium-input"
+                    className="auth-input"
                   />
                 </div>
-                <div className="bg-muted/50 p-4 rounded-lg text-sm text-muted-foreground">
-                  <p className="font-medium mb-1">Demo accounts:</p>
+                <div className="demo-notice">
+                  <p className="demo-notice-heading">Demo accounts:</p>
                   <p>- Admin: admin@example.com (any password)</p>
                   <p>- Customer: customer@example.com (any password)</p>
                 </div>
               </CardContent>
-              <CardFooter className="flex flex-col space-y-4">
+              <CardFooter className="auth-form-footer">
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg py-6" 
+                  className="auth-button" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Signing in...' : 'Sign in'}
                 </Button>
                 
-                <div className="text-center text-sm text-muted-foreground">
+                <div className="auth-form-link">
                   Don't have an account?{' '}
-                  <Link to="/signup" className="text-primary hover:underline font-medium">
+                  <Link to="/signup" className="auth-form-link-highlight">
                     Sign up
                   </Link>
                 </div>

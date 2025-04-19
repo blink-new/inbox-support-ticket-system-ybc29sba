@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
  
-    --primary: 221 70% 55%;
+    --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
  
     --secondary: 199 89% 48%;
@@ -146,7 +146,7 @@ html {
 }
 
 .bg-gradient-hero {
-  @apply bg-gradient-to-b from-primary/5 via-background to-background;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.02) 100%);
 }
 
 /* Card hover effects */
@@ -204,7 +204,7 @@ html {
 
 /* Premium UI elements */
 .glass-card {
-  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+  @apply bg-white/90 backdrop-blur-md border border-white/20 shadow-lg;
 }
 
 .dark .glass-card {
@@ -212,7 +212,7 @@ html {
 }
 
 .premium-input {
-  @apply rounded-lg border-gray-200 bg-white/80 backdrop-blur-sm focus:border-primary focus:ring-1 focus:ring-primary transition-all;
+  @apply rounded-lg border-gray-200 bg-white/90 backdrop-blur-sm focus:border-primary focus:ring-1 focus:ring-primary transition-all;
 }
 
 .premium-badge {
@@ -293,7 +293,7 @@ html {
 
 /* Pricing card */
 .pricing-card {
-  @apply rounded-2xl border border-border/40 bg-white/90 backdrop-blur-sm shadow-soft transition-all duration-300;
+  @apply rounded-2xl border border-border/40 bg-white/95 backdrop-blur-sm shadow-soft transition-all duration-300;
 }
 
 .dark .pricing-card {
@@ -311,4 +311,355 @@ html {
   z-index: -1;
   border-radius: inherit;
   background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+}
+
+/* Hero section styles */
+.hero-badge {
+  @apply inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium;
+}
+
+.hero-heading {
+  @apply text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight;
+}
+
+.hero-subheading {
+  @apply text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mt-6 leading-relaxed;
+}
+
+/* Stats section */
+.stat-value {
+  @apply text-3xl md:text-4xl font-bold text-primary mb-2;
+}
+
+.stat-label {
+  @apply text-sm text-muted-foreground font-medium;
+}
+
+/* Feature card */
+.feature-card {
+  @apply bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all card-hover;
+}
+
+.feature-icon-container {
+  @apply bg-white/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5;
+}
+
+/* How it works section */
+.step-icon-container {
+  @apply w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-5;
+}
+
+.step-icon {
+  @apply h-8 w-8 text-primary;
+}
+
+/* Login/Signup form styles */
+.auth-card {
+  @apply w-full glass-card shadow-soft max-w-md mx-auto;
+}
+
+.auth-input {
+  @apply premium-input w-full;
+}
+
+.auth-button {
+  @apply w-full bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg py-6;
+}
+
+/* Navbar styles */
+.navbar {
+  @apply border-b bg-white/95 backdrop-blur-md sticky top-0 z-50;
+}
+
+.navbar-container {
+  @apply container mx-auto px-4 py-4;
+}
+
+.navbar-logo {
+  @apply flex items-center gap-2;
+}
+
+.navbar-logo-icon {
+  @apply bg-primary p-2 rounded-lg;
+}
+
+.navbar-logo-text {
+  @apply font-bold text-xl tracking-tight;
+}
+
+/* App preview window */
+.app-preview {
+  @apply rounded-2xl border border-border/40 shadow-soft overflow-hidden bg-card relative;
+}
+
+.app-preview-header {
+  @apply bg-muted p-2 border-b flex items-center gap-2;
+}
+
+.app-preview-dots {
+  @apply flex gap-1.5;
+}
+
+.app-preview-dot {
+  @apply w-3 h-3 rounded-full;
+}
+
+.app-preview-content {
+  @apply aspect-video bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center p-8 relative overflow-hidden;
+}
+
+/* Improved CTA section */
+.cta-container {
+  @apply max-w-4xl mx-auto text-center space-y-8 glass-card p-12 rounded-2xl;
+}
+
+.cta-heading {
+  @apply text-3xl md:text-4xl font-bold;
+}
+
+.cta-description {
+  @apply text-muted-foreground text-lg max-w-2xl mx-auto;
+}
+
+.cta-buttons {
+  @apply flex flex-col sm:flex-row gap-4 justify-center pt-6;
+}
+
+/* Footer styles */
+.footer {
+  @apply border-t py-12 bg-muted/20;
+}
+
+.footer-container {
+  @apply container mx-auto px-4;
+}
+
+.footer-grid {
+  @apply grid grid-cols-2 md:grid-cols-4 gap-8 mb-12;
+}
+
+.footer-heading {
+  @apply font-semibold mb-4;
+}
+
+.footer-link {
+  @apply text-muted-foreground hover:text-primary transition-colors;
+}
+
+.footer-bottom {
+  @apply flex flex-col md:flex-row justify-between items-center pt-8 border-t;
+}
+
+.footer-logo {
+  @apply flex items-center gap-2 mb-4 md:mb-0;
+}
+
+.footer-logo-icon {
+  @apply bg-primary p-2 rounded-lg;
+}
+
+.footer-logo-text {
+  @apply font-semibold;
+}
+
+.footer-copyright {
+  @apply text-sm text-muted-foreground;
+}
+
+/* Improved company logos */
+.company-logos {
+  @apply flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-80;
+}
+
+.company-logo {
+  @apply h-8 w-auto grayscale hover:grayscale-0 transition-all duration-300 hover:opacity-100;
+}
+
+/* Improved pricing toggle */
+.pricing-toggle {
+  @apply flex items-center justify-center gap-4 mb-16;
+}
+
+.pricing-toggle-option {
+  @apply text-sm font-medium;
+}
+
+.pricing-toggle-active {
+  @apply text-foreground;
+}
+
+.pricing-toggle-inactive {
+  @apply text-muted-foreground;
+}
+
+.pricing-toggle-switch {
+  @apply flex items-center;
+}
+
+.pricing-toggle-discount {
+  @apply bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium dark:bg-green-900/30 dark:text-green-400;
+}
+
+/* Improved FAQ section */
+.faq-card {
+  @apply bg-card rounded-xl p-6 shadow-soft;
+}
+
+.faq-question {
+  @apply text-lg font-semibold mb-2;
+}
+
+.faq-answer {
+  @apply text-muted-foreground;
+}
+
+/* Improved enterprise section */
+.enterprise-card {
+  @apply max-w-4xl mx-auto glass-card p-10 rounded-2xl;
+}
+
+.enterprise-container {
+  @apply flex flex-col md:flex-row gap-8 items-center;
+}
+
+.enterprise-content {
+  @apply md:w-1/2;
+}
+
+.enterprise-features {
+  @apply md:w-1/2 bg-primary/5 p-6 rounded-xl;
+}
+
+.enterprise-feature {
+  @apply flex items-start gap-3;
+}
+
+.enterprise-feature-icon {
+  @apply h-5 w-5 text-primary shrink-0 mt-0.5;
+}
+
+/* Improved testimonial section */
+.testimonials-grid {
+  @apply grid md:grid-cols-2 gap-8 max-w-4xl mx-auto;
+}
+
+.testimonial-stars {
+  @apply flex mb-4;
+}
+
+.testimonial-star {
+  @apply h-4 w-4 text-yellow-400 fill-yellow-400;
+}
+
+.testimonial-quote {
+  @apply italic text-muted-foreground mb-6 text-lg;
+}
+
+.testimonial-author {
+  @apply flex items-center;
+}
+
+.testimonial-avatar {
+  @apply w-12 h-12 rounded-full mr-4 object-cover;
+}
+
+.testimonial-name {
+  @apply font-semibold;
+}
+
+.testimonial-role {
+  @apply text-sm text-muted-foreground;
+}
+
+/* Improved how it works section */
+.how-it-works-grid {
+  @apply grid md:grid-cols-3 gap-8 max-w-5xl mx-auto;
+}
+
+.how-it-works-step {
+  @apply flex flex-col items-center text-center;
+}
+
+/* Improved features section */
+.features-grid {
+  @apply grid md:grid-cols-2 lg:grid-cols-4 gap-8;
+}
+
+/* Improved app preview */
+.app-preview-card {
+  @apply text-center z-10 glass-card p-8 rounded-xl shadow-lg border animate-float;
+}
+
+.app-preview-icon {
+  @apply bg-primary p-4 rounded-full inline-block mb-4;
+}
+
+.app-preview-title {
+  @apply text-xl font-bold mb-2;
+}
+
+.app-preview-description {
+  @apply text-muted-foreground;
+}
+
+/* Improved buttons */
+.primary-button {
+  @apply gap-2 bg-primary hover:bg-primary/90 text-white transition-colors rounded-lg px-8 py-6 text-base font-medium;
+}
+
+.outline-button {
+  @apply border-primary text-primary hover:bg-primary/10 transition-colors rounded-lg px-8 py-6 text-base font-medium;
+}
+
+/* Improved stats section */
+.stats-grid {
+  @apply max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12;
+}
+
+/* Improved hero buttons */
+.hero-buttons {
+  @apply flex flex-col sm:flex-row gap-4 pt-8 justify-center;
+}
+
+/* Improved back button */
+.back-button {
+  @apply pl-0 flex items-center gap-1 text-primary;
+}
+
+/* Improved auth form */
+.auth-form {
+  @apply space-y-4;
+}
+
+.auth-form-group {
+  @apply space-y-2;
+}
+
+.auth-form-label {
+  @apply flex items-center justify-between;
+}
+
+.auth-form-forgot {
+  @apply p-0 h-auto text-xs text-primary;
+}
+
+.auth-form-footer {
+  @apply flex flex-col space-y-4;
+}
+
+.auth-form-link {
+  @apply text-center text-sm text-muted-foreground;
+}
+
+.auth-form-link-highlight {
+  @apply text-primary hover:underline font-medium;
+}
+
+/* Improved demo notice */
+.demo-notice {
+  @apply bg-muted/50 p-4 rounded-lg text-sm text-muted-foreground;
+}
+
+.demo-notice-heading {
+  @apply font-medium mb-1;
 }
