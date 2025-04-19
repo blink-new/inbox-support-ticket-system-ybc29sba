@@ -72,7 +72,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <div className="bg-gradient-primary p-2 rounded-lg">
+              <div className="bg-primary p-2 rounded-lg">
                 <Inbox className="h-6 w-6 text-white" />
               </div>
               <span className="font-bold text-xl">Support Inbox</span>
@@ -88,7 +88,7 @@ export default function LandingPage() {
               <Button variant="ghost" onClick={() => navigate('/login')}>Sign In</Button>
               <Button 
                 onClick={() => navigate('/signup')}
-                className="bg-gradient-primary hover:opacity-90 transition-all"
+                className="bg-primary hover:bg-primary/90 text-white transition-colors"
               >
                 Get Started
               </Button>
@@ -123,7 +123,7 @@ export default function LandingPage() {
             <Button 
               size="lg" 
               onClick={() => navigate('/signup')} 
-              className="gap-2 bg-gradient-primary hover:opacity-90 transition-all"
+              className="gap-2 bg-primary hover:bg-primary/90 text-white transition-colors"
             >
               Get Started <ArrowRight className="h-4 w-4" />
             </Button>
@@ -131,7 +131,7 @@ export default function LandingPage() {
               size="lg" 
               variant="outline" 
               onClick={() => navigate('/pricing')}
-              className="border-primary text-primary hover:bg-primary/5"
+              className="border-primary text-primary hover:bg-primary/10 transition-colors"
             >
               View Pricing
             </Button>
@@ -163,7 +163,7 @@ export default function LandingPage() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <div className="bg-gradient-primary p-4 rounded-full inline-block mb-4">
+              <div className="bg-primary p-4 rounded-full inline-block mb-4">
                 <Inbox className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-2">Streamlined Support</h3>
@@ -174,7 +174,7 @@ export default function LandingPage() {
       </div>
       
       {/* Features Section */}
-      <div className="py-16 bg-gradient-primary text-white">
+      <div className="py-16 bg-primary text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Streamline Your Customer Support</h2>
@@ -254,7 +254,7 @@ export default function LandingPage() {
             <Button 
               size="lg" 
               onClick={() => navigate('/pricing')} 
-              className="gap-2 bg-gradient-primary hover:opacity-90 transition-all"
+              className="gap-2 bg-primary hover:bg-primary/90 text-white transition-colors"
             >
               View Pricing <ArrowRight className="h-4 w-4" />
             </Button>
@@ -262,7 +262,7 @@ export default function LandingPage() {
               size="lg" 
               variant="outline" 
               onClick={() => navigate('/signup')}
-              className="border-primary text-primary hover:bg-primary/5"
+              className="border-primary text-primary hover:bg-primary/10 transition-colors"
             >
               Start Free Trial
             </Button>
@@ -275,7 +275,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <div className="bg-gradient-primary p-2 rounded-lg">
+              <div className="bg-primary p-2 rounded-lg">
                 <Inbox className="h-5 w-5 text-white" />
               </div>
               <span className="font-semibold">Support Inbox</span>

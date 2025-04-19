@@ -23,7 +23,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
  
-    --accent: 262 83% 58%;
+    --accent: 221 83% 65%;
     --accent-foreground: 222.2 47.4% 11.2%;
  
     --destructive: 0 84.2% 60.2%;
@@ -58,7 +58,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
  
-    --accent: 262 83% 58%;
+    --accent: 217 91% 70%;
     --accent-foreground: 210 40% 98%;
  
     --destructive: 0 62.8% 30.6%;
@@ -101,7 +101,7 @@
 
 /* Gradient text */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
 }
 
 /* Custom background patterns */
@@ -117,7 +117,7 @@
 
 /* Gradient backgrounds */
 .bg-gradient-primary {
-  @apply bg-gradient-to-br from-primary/80 via-primary to-secondary;
+  @apply bg-gradient-to-r from-primary to-secondary;
 }
 
 .bg-gradient-hero {
@@ -131,7 +131,24 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 transition-all;
+  @apply bg-gradient-to-r from-primary to-secondary text-white transition-all;
+}
+
+.btn-primary:hover {
+  @apply opacity-90;
+}
+
+/* Custom button hover styles */
+.button-primary {
+  @apply bg-primary text-white hover:bg-primary/90 transition-colors;
+}
+
+.button-secondary {
+  @apply bg-secondary text-white hover:bg-secondary/90 transition-colors;
+}
+
+.button-outline {
+  @apply border border-primary text-primary hover:bg-primary/10 transition-colors;
 }
 
 /* Custom scrollbar */

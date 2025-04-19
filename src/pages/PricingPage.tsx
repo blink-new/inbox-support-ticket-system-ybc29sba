@@ -31,7 +31,7 @@ export default function PricingPage() {
       ],
       cta: 'Start Free Trial',
       popular: false,
-      color: 'from-blue-400 to-blue-500',
+      color: 'bg-blue-500 hover:bg-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/10',
       iconColor: 'text-blue-500',
     },
@@ -51,7 +51,7 @@ export default function PricingPage() {
       limitations: [],
       cta: 'Get Started',
       popular: true,
-      color: 'from-primary to-secondary',
+      color: 'bg-primary hover:bg-primary/90',
       bgColor: 'bg-primary/5 dark:bg-primary/10',
       iconColor: 'text-primary',
     },
@@ -73,9 +73,9 @@ export default function PricingPage() {
       limitations: [],
       cta: 'Contact Sales',
       popular: false,
-      color: 'from-purple-500 to-accent',
+      color: 'bg-purple-600 hover:bg-purple-700',
       bgColor: 'bg-purple-50 dark:bg-purple-900/10',
-      iconColor: 'text-accent',
+      iconColor: 'text-purple-600',
     }
   ]
 
@@ -106,7 +106,7 @@ export default function PricingPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <div className="bg-gradient-primary p-2 rounded-lg">
+              <div className="bg-primary p-2 rounded-lg">
                 <Inbox className="h-6 w-6 text-white" />
               </div>
               <span className="font-bold text-xl">Support Inbox</span>
@@ -115,7 +115,7 @@ export default function PricingPage() {
               <Button variant="ghost" onClick={() => navigate('/login')}>Sign In</Button>
               <Button 
                 onClick={() => navigate('/signup')}
-                className="bg-gradient-primary hover:opacity-90 transition-all"
+                className="bg-primary hover:bg-primary/90 text-white transition-colors"
               >
                 Get Started
               </Button>
@@ -159,7 +159,7 @@ export default function PricingPage() {
               <Switch 
                 checked={billingCycle === 'yearly'} 
                 onCheckedChange={(checked) => setBillingCycle(checked ? 'yearly' : 'monthly')}
-                className="data-[state=checked]:bg-gradient-primary"
+                className="data-[state=checked]:bg-primary"
               />
             </div>
             <span className={`text-sm font-medium flex items-center gap-2 ${billingCycle === 'yearly' ? 'text-foreground' : 'text-muted-foreground'}`}>
@@ -186,7 +186,7 @@ export default function PricingPage() {
             >
               {plan.popular && (
                 <div className="absolute -top-4 inset-x-0 mx-auto w-max">
-                  <span className="bg-gradient-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                  <span className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
                     Most Popular
                   </span>
                 </div>
@@ -231,7 +231,7 @@ export default function PricingPage() {
                 </CardContent>
                 <CardFooter>
                   <Button 
-                    className={`w-full bg-gradient-to-r ${plan.color} text-white hover:opacity-90`}
+                    className={`w-full text-white transition-colors ${plan.color}`}
                     onClick={() => navigate('/signup')}
                   >
                     {plan.cta}
@@ -289,7 +289,7 @@ export default function PricingPage() {
             <Button 
               size="lg" 
               onClick={() => navigate('/signup')} 
-              className="gap-2 bg-gradient-primary hover:opacity-90 transition-all"
+              className="gap-2 bg-primary hover:bg-primary/90 text-white transition-colors"
             >
               Start Your Free Trial <ArrowRight className="h-4 w-4" />
             </Button>
@@ -297,7 +297,7 @@ export default function PricingPage() {
               size="lg" 
               variant="outline" 
               onClick={() => navigate('/login')}
-              className="border-primary text-primary hover:bg-primary/5"
+              className="border-primary text-primary hover:bg-primary/10 transition-colors"
             >
               Contact Sales
             </Button>
@@ -310,7 +310,7 @@ export default function PricingPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <div className="bg-gradient-primary p-2 rounded-lg">
+              <div className="bg-primary p-2 rounded-lg">
                 <Inbox className="h-5 w-5 text-white" />
               </div>
               <span className="font-semibold">Support Inbox</span>

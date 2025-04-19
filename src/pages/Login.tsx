@@ -57,7 +57,7 @@ export default function Login() {
           <Card className="w-full border-2 shadow-lg">
             <CardHeader className="space-y-1 text-center">
               <div className="flex justify-center mb-2">
-                <div className="bg-gradient-primary p-3 rounded-full">
+                <div className="bg-primary p-3 rounded-full">
                   <Inbox className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function Login() {
               <CardFooter className="flex flex-col space-y-4">
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-primary hover:opacity-90 transition-all" 
+                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Signing in...' : 'Sign in'}

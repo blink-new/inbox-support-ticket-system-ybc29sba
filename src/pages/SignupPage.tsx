@@ -64,7 +64,7 @@ export default function SignupPage() {
           <Card className="border-2 shadow-lg">
             <CardHeader className="space-y-1">
               <div className="flex justify-center mb-2">
-                <div className="bg-gradient-primary p-3 rounded-full">
+                <div className="bg-primary p-3 rounded-full">
                   <Inbox className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function SignupPage() {
               <CardFooter className="flex flex-col space-y-4">
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-primary hover:opacity-90 transition-all" 
+                  className="w-full bg-primary hover:bg-primary/90 text-white transition-colors" 
                   disabled={isLoading}
                 >
                   {isLoading ? 'Creating account...' : 'Create account'}
