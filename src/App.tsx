@@ -8,6 +8,7 @@ import TicketDetail from './pages/TicketDetail'
 import Login from './pages/Login'
 import LandingPage from './pages/LandingPage'
 import SignupPage from './pages/SignupPage'
+import PricingPage from './pages/PricingPage'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeProvider'
 
@@ -30,6 +31,7 @@ function AppRoutes() {
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/pricing" element={<PricingPage />} />
       
       <Route path="/" element={
         user ? <Navigate to={user.role === 'admin' ? '/admin' : '/customer'} replace /> : <Navigate to="/landing" replace />

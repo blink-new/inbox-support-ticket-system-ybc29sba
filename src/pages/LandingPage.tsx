@@ -78,6 +78,13 @@ export default function LandingPage() {
               <span className="font-bold text-xl">Support Inbox</span>
             </div>
             <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/pricing')}
+                className="text-primary hover:text-primary/80"
+              >
+                Pricing
+              </Button>
               <Button variant="ghost" onClick={() => navigate('/login')}>Sign In</Button>
               <Button 
                 onClick={() => navigate('/signup')}
@@ -123,10 +130,10 @@ export default function LandingPage() {
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/pricing')}
               className="border-primary text-primary hover:bg-primary/5"
             >
-              Sign In
+              View Pricing
             </Button>
           </div>
         </motion.div>
@@ -246,18 +253,18 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button 
               size="lg" 
-              onClick={() => navigate('/signup')} 
+              onClick={() => navigate('/pricing')} 
               className="gap-2 bg-gradient-primary hover:opacity-90 transition-all"
             >
-              Get Started <ArrowRight className="h-4 w-4" />
+              View Pricing <ArrowRight className="h-4 w-4" />
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/signup')}
               className="border-primary text-primary hover:bg-primary/5"
             >
-              Sign In
+              Start Free Trial
             </Button>
           </div>
         </motion.div>
